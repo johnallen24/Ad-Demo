@@ -7,40 +7,84 @@
 //
 
 import UIKit
+import Firebase
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    let locationManager = CLLocationManager()
+    var cardsController: CardsController?
+    var region1: CLBeaconRegion!
+    var region2: CLBeaconRegion!
+    var region3: CLBeaconRegion!
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool { 
+        FirebaseApp.configure()
+        locationManager.delegate = self
+        
+        locationManager.requestAlwaysAuthorization()
+        region1 = CLBeaconRegion(proximityUUID: UUID(uuidString:
+            "7A05510F-EEB8-4795-AAB7-611A18EBEA68")!, identifier: "lobby")
+        locationManager.startMonitoring(for: region1)
+        region2 = CLBeaconRegion(proximityUUID: UUID(uuidString: "236C434A-4404-4D0B-A4E6-064BFD734959")!, identifier: "gym")
+        locationManager.startMonitoring(for: region2)
+        region3 = CLBeaconRegion(proximityUUID: UUID(uuidString: "BCA717D7-23C3-42BD-883A-22D4F44104CC")!, identifier: "pool")
+        locationManager.startMonitoring(for: region3)
+        
+        let userDefault = UserDefaults.standard
+        userDefault.set([], forKey: "currentLocations2")
+        
+        if !isAppAlreadyLaunchedOnce() {
+            let userDefault = UserDefaults.standard
+            userDefault.set([], forKey: "currentLocations2")
+        }
+        
         return true
-    }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-    }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-
+}
 
 }
+
+extension AppDelegate: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        print("found ya")
+        if region is CLBeaconRegion {
+            let location = region.identifier
+            let userDefault = UserDefaults.standard
+            var curLocations = userDefault.value(forKey: "currentLocations2") as! [String]
+            if !curLocations.contains(location) {
+            curLocations.append(location)
+            userDefault.set(curLocations, forKey: "currentLocations2")
+                if let controller = cardsController {
+                    print("reload")
+                    controller.reloadData()
+                }
+
+            }
+            print(curLocations)
+            
+        }
+    }
+    
+    
+    func isAppAlreadyLaunchedOnce()->Bool{
+        let defaults = UserDefaults.standard
+        if let _ = defaults.string(forKey: "isAppAlreadyLaunchedOnce"){
+            print("App already launched")
+            return true
+        }else{
+            defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
+            print("App launched first time")
+            return false
+        }
+    }
+
+    }
+    
+    
+
+
 
