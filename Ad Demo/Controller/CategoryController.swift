@@ -99,9 +99,15 @@ class CategoryController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.item == 3 {
+            let controller = EventsController()
+            navigationController?.pushViewController(controller, animated: true)
+        }
+        else {
         let controller = CardsController()
         controller.category = getCategory(index: indexPath.item)
         navigationController?.pushViewController(controller, animated: true)
+        }
     }
 
     func getCategory(index: Int) -> Category {
