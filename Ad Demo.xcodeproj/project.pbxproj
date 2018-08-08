@@ -23,6 +23,8 @@
 		AB95CEA721129317009184BF /* Firebase URLGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB95CEA621129317009184BF /* Firebase URLGetter.swift */; };
 		AB95CEA92113C264009184BF /* EventsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB95CEA82113C264009184BF /* EventsController.swift */; };
 		AB95CEAB2113C603009184BF /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB95CEAA2113C603009184BF /* EventCell.swift */; };
+		AB95CEAD2114A3A6009184BF /* MuseumCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB95CEAC2114A3A6009184BF /* MuseumCardCell.swift */; };
+		AB95CEAF2114A438009184BF /* MuseumController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB95CEAE2114A438009184BF /* MuseumController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		AB95CEA621129317009184BF /* Firebase URLGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firebase URLGetter.swift"; sourceTree = "<group>"; };
 		AB95CEA82113C264009184BF /* EventsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsController.swift; sourceTree = "<group>"; };
 		AB95CEAA2113C603009184BF /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		AB95CEAC2114A3A6009184BF /* MuseumCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuseumCardCell.swift; sourceTree = "<group>"; };
+		AB95CEAE2114A438009184BF /* MuseumController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuseumController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +124,7 @@
 				AB9132172110AC1E005E8156 /* CategoryController.swift */,
 				AB91322F2110F628005E8156 /* CardsController.swift */,
 				AB95CEA82113C264009184BF /* EventsController.swift */,
+				AB95CEAE2114A438009184BF /* MuseumController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -130,6 +135,7 @@
 				AB9132272110BB99005E8156 /* CategoryCell.swift */,
 				AB913231211103B1005E8156 /* CardCell.swift */,
 				AB95CEAA2113C603009184BF /* EventCell.swift */,
+				AB95CEAC2114A3A6009184BF /* MuseumCardCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -262,11 +268,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB913232211103B1005E8156 /* CardCell.swift in Sources */,
+				AB95CEAD2114A3A6009184BF /* MuseumCardCell.swift in Sources */,
 				AB95CE9F2112474E009184BF /* Extensions.swift in Sources */,
 				AB95CEA721129317009184BF /* Firebase URLGetter.swift in Sources */,
 				AB95CEA321125B8B009184BF /* Card.swift in Sources */,
 				AB95CEA92113C264009184BF /* EventsController.swift in Sources */,
 				AB9132182110AC1E005E8156 /* CategoryController.swift in Sources */,
+				AB95CEAF2114A438009184BF /* MuseumController.swift in Sources */,
 				AB95CEAB2113C603009184BF /* EventCell.swift in Sources */,
 				AB9132162110AC1E005E8156 /* AppDelegate.swift in Sources */,
 				AB9132282110BB99005E8156 /* CategoryCell.swift in Sources */,

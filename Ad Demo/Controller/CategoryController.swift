@@ -99,7 +99,13 @@ class CategoryController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.item == 3 {
+        
+        if indexPath.item == 0 {
+            let controller = MuseumController()
+            navigationController?.pushViewController(controller, animated: true)
+        }
+        
+        else if indexPath.item == 3 {
             let controller = EventsController()
             navigationController?.pushViewController(controller, animated: true)
         }

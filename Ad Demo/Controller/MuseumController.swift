@@ -1,15 +1,14 @@
 //
-//  CardsController.swift
+//  MuseumController.swift
 //  Ad Demo
 //
-//  Created by John Allen on 7/31/18.
+//  Created by John Allen on 8/3/18.
 //  Copyright © 2018 jallen.studios. All rights reserved.
 //
 
 import UIKit
 
-class CardsController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+class MuseumController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
 
     var category: Category?
@@ -30,7 +29,7 @@ class CardsController: UIViewController, UITableViewDelegate, UITableViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.cardsController = self
+        //appDelegate.cardsController = self
         
         checkData()
         
@@ -39,10 +38,10 @@ class CardsController: UIViewController, UITableViewDelegate, UITableViewDataSou
         view.backgroundColor = UIColor.white
         cards.delegate = self
         cards.dataSource = self
-        cards.register(CardCell.self, forCellReuseIdentifier: "cellID")
+        cards.register(MuseumCardCell.self, forCellReuseIdentifier: "cellID")
         cards.tableFooterView = UIView()
         cards.separatorStyle = .none
- 
+        
         setupViews()
         
     }
@@ -80,13 +79,13 @@ class CardsController: UIViewController, UITableViewDelegate, UITableViewDataSou
         view.addSubview(cards)
         view.addConstraintsWithFormat(format: "V:|[v0]|", views: cards)
         view.addConstraintsWithFormat(format: "H:|[v0]|", views: cards)
-    
+        
     }
- 
-    //change here 
-   
+    
+    //change here
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if ((indexPath.row == (currentNames.count - 1)) || (indexPath.row == selectedIndexPath)) {
+        if ((indexPath.row == (paintings.count - 1)) || (indexPath.row == selectedIndexPath)) {
             return 401
         } else if (isTableCellSelected) {
             return 10
@@ -106,21 +105,21 @@ class CardsController: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         DispatchQueue.main.async {
             tableView.beginUpdates()
-            //MARK: need to work on 
-//            let row = indexPath.row + 1
-//            if row < self.cards.numberOfRows(inSection: 0) {
-//                let section = indexPath.section
-//                let indexPath = IndexPath(row: row, section: section)
-//                let cardBelow = self.cards.cellForRow(at: indexPath) as! CardCell
-//                cardBelow.colorContainer.backgroundColor = UIColor.clear
-//            }
+            //MARK: need to work on
+            //            let row = indexPath.row + 1
+            //            if row < self.cards.numberOfRows(inSection: 0) {
+            //                let section = indexPath.section
+            //                let indexPath = IndexPath(row: row, section: section)
+            //                let cardBelow = self.cards.cellForRow(at: indexPath) as! CardCell
+            //                cardBelow.colorContainer.backgroundColor = UIColor.clear
+            //            }
             tableView.endUpdates()
-           
+            
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currentNames.count
+        return paintings.count
     }
     
     func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
@@ -133,14 +132,14 @@ class CardsController: UIViewController, UITableViewDelegate, UITableViewDataSou
                 if let logos = logosDict[location]  {
                     for logo in logos {
                         if !currentLogos.contains(logo) {
-                        currentLogos.append(logo)
+                            currentLogos.append(logo)
                         }
                     }
                 }
                 if let names = namesDict[location] {
                     for name in names {
                         if !currentNames.contains(name) {
-                        currentNames.append(name)
+                            currentNames.append(name)
                         }
                     }
                 }
@@ -190,21 +189,31 @@ class CardsController: UIViewController, UITableViewDelegate, UITableViewDataSou
         locations = userDefault.value(forKey: "currentLocations2") as! [String]
     }
     
+    let pnames = ["Mona Lisa", "Au Lapin Agile", "Freedom From Want"]
+    let paintings = ["monalisa", "picasso", "normanrockwell"]
+    let authors = ["Leonardo Da Vinci", "Picasso", "Norman Rockwell"]
+    let descriptions = ["The title of the painting, which is known in English as Mona Lisa, comes from a description by Renaissance art historian Giorgio Vasari...", "Regarded as one of the most influential artists of the 20th century, he is known for co-founding the Cubist movement, the invention of constructed sculpture...", "The third of the Four Freedoms series of four oil paintings by American artist Norman Rockwell. The works were inspired by United States President Franklin D. Roosevelt's..."]
+    
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = cards.dequeueReusableCell(withIdentifier: "cellID") as! CardCell
+        let cell = cards.dequeueReusableCell(withIdentifier: "cellID") as! MuseumCardCell
         
         //change back to currentnames and currentlogos
-        cell.companyNameLabel.text = currentNames[indexPath.row]
-        cell.companyLogo.image = UIImage(named: currentLogos[indexPath.row])
-        cell.discountLabel.text = discounts[indexPath.row]
-        cell.descriptionLabel.text = desciptions[indexPath.row]
+        cell.companyNameLabel.text = pnames[indexPath.row]
+        cell.authorLabel.text = authors[indexPath.row]
+        cell.descriptionLabel.text = descriptions[indexPath.row]
+        cell.imageView2.image = UIImage(named: paintings[indexPath.row])
+       
+//        cell.discountLabel.text = discounts[indexPath.row]
+//        cell.descriptionLabel.text = desciptions[indexPath.row]
         
         if isTableCellSelected == false {
-        if let color = previousColor {
-            cell.colorContainer.backgroundColor = color
-        }
-        previousColor = colors[indexPath.row]
+            if let color = previousColor {
+                cell.colorContainer.backgroundColor = color
+            }
+            previousColor = colors[indexPath.row]
         }
         else {
             print("123")
@@ -214,13 +223,7 @@ class CardsController: UIViewController, UITableViewDelegate, UITableViewDataSou
         cell.cardContainer.backgroundColor = colors[indexPath.row]
         return cell
     }
-
-
+    
+    
 }
 
-enum Category {
-    case movie
-    case food
-    case drink
-    case event
-}
