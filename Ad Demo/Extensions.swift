@@ -37,3 +37,15 @@ static func intFromHexString(hexStr: String) -> UInt32 {
 }
 
 }
+
+
+
+extension String {
+    
+    func sizeOfString(usingFont font: UIFont) -> CGSize {
+        let fontAttributes = [NSAttributedStringKey.font: font]
+        return self.size(withAttributes: fontAttributes)
+    }
+    
+    
+}

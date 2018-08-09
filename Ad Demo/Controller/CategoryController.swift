@@ -17,8 +17,8 @@ class CategoryController: UIViewController, UICollectionViewDelegate, UICollecti
     var region3: CLBeaconRegion!
     
     
-    var categoryNames = ["Movies", "Food", "Drinks", "Events"]
-    var categoryImageNames = ["movie-category", "food-category2", "drink-category2", "event-category"]
+    var categoryNames = ["Museum", "Food", "Drinks", "Events"]
+    var categoryImageNames = ["museum-category", "food-category2", "drink-category2", "event-category"]
     
 //    var categories: [Category]  = {
 //        for title in categoryTitles {
@@ -32,11 +32,18 @@ class CategoryController: UIViewController, UICollectionViewDelegate, UICollecti
         return cv
     }()
     
-    
+//    let button: UIButton = {
+//        let b = UIButton()
+//        b.setTitle("Hello", for: .normal)
+//        b.addTarget(self, action: #selector(pushConferenceController), for: .touchUpInside)
+//        return b
+//    }()
+//
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Demo"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(pushConferenceController))
         
         
         categoriesCollectionView.delegate = self
@@ -46,6 +53,12 @@ class CategoryController: UIViewController, UICollectionViewDelegate, UICollecti
        // setupBeacons()
         setupViews()
         
+    }
+    
+    @objc func pushConferenceController() {
+        let vc = PresentationController()
+        PresentationConstants.getTopics(forLocation: "hey")
+        navigationController?.pushViewController(vc, animated: true)
     }
 
 //    func setupBeacons() {
@@ -132,7 +145,7 @@ class CategoryController: UIViewController, UICollectionViewDelegate, UICollecti
         }
     }
     
-}
+}   
 
 
 extension UIView {

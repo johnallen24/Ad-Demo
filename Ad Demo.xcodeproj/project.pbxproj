@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		5E152C6A93644D0207EC89E8 /* Pods_Ad_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F052FC16C3820729F3D968 /* Pods_Ad_Demo.framework */; };
+		AB3C7F3D211A89E300350DD4 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3C7F3C211A89E300350DD4 /* PresentationController.swift */; };
+		AB3C7F3F211A92C000350DD4 /* PresentationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3C7F3E211A92C000350DD4 /* PresentationCell.swift */; };
+		AB3C7F41211C90DC00350DD4 /* PresentationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3C7F40211C90DC00350DD4 /* PresentationConstants.swift */; };
+		AB3C7F44211CCD8D00350DD4 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3C7F43211CCD8D00350DD4 /* EventDetailView.swift */; };
 		AB9132162110AC1E005E8156 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9132152110AC1E005E8156 /* AppDelegate.swift */; };
 		AB9132182110AC1E005E8156 /* CategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9132172110AC1E005E8156 /* CategoryController.swift */; };
 		AB91321B2110AC1E005E8156 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB9132192110AC1E005E8156 /* Main.storyboard */; };
@@ -31,6 +35,10 @@
 		647179A7DE0D30CB51BD2586 /* Pods-Ad Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ad Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ad Demo/Pods-Ad Demo.debug.xcconfig"; sourceTree = "<group>"; };
 		75014E4CDA26D797F19DCC5F /* Pods-Ad Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ad Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ad Demo/Pods-Ad Demo.release.xcconfig"; sourceTree = "<group>"; };
 		90F052FC16C3820729F3D968 /* Pods_Ad_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ad_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB3C7F3C211A89E300350DD4 /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
+		AB3C7F3E211A92C000350DD4 /* PresentationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationCell.swift; sourceTree = "<group>"; };
+		AB3C7F40211C90DC00350DD4 /* PresentationConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PresentationConstants.swift; path = "/Users/johnallen/Desktop/Beacon Projects/Ad Demo/Ad Demo/PresentationConstants.swift"; sourceTree = "<absolute>"; };
+		AB3C7F43211CCD8D00350DD4 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
 		AB9132122110AC1E005E8156 /* Ad Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ad Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB9132152110AC1E005E8156 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB9132172110AC1E005E8156 /* CategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryController.swift; sourceTree = "<group>"; };
@@ -81,6 +89,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		AB3C7F42211C973B00350DD4 /* Current Work */ = {
+			isa = PBXGroup;
+			children = (
+				AB3C7F43211CCD8D00350DD4 /* EventDetailView.swift */,
+				AB95CEAA2113C603009184BF /* EventCell.swift */,
+				AB95CEA82113C264009184BF /* EventsController.swift */,
+			);
+			path = "Current Work";
+			sourceTree = "<group>";
+		};
 		AB9132092110AC1E005E8156 = {
 			isa = PBXGroup;
 			children = (
@@ -108,7 +126,9 @@
 				AB91322D2110C6B4005E8156 /* View */,
 				AB91322C2110C6AC005E8156 /* Controller */,
 				AB9132192110AC1E005E8156 /* Main.storyboard */,
+				AB3C7F42211C973B00350DD4 /* Current Work */,
 				AB95CE9E2112474E009184BF /* Extensions.swift */,
+				AB3C7F40211C90DC00350DD4 /* PresentationConstants.swift */,
 				AB95CEA421128DDD009184BF /* Firebase Uploader.swift */,
 				AB95CEA621129317009184BF /* Firebase URLGetter.swift */,
 				AB91321C2110AC20005E8156 /* Assets.xcassets */,
@@ -123,8 +143,8 @@
 			children = (
 				AB9132172110AC1E005E8156 /* CategoryController.swift */,
 				AB91322F2110F628005E8156 /* CardsController.swift */,
-				AB95CEA82113C264009184BF /* EventsController.swift */,
 				AB95CEAE2114A438009184BF /* MuseumController.swift */,
+				AB3C7F3C211A89E300350DD4 /* PresentationController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -134,8 +154,8 @@
 			children = (
 				AB9132272110BB99005E8156 /* CategoryCell.swift */,
 				AB913231211103B1005E8156 /* CardCell.swift */,
-				AB95CEAA2113C603009184BF /* EventCell.swift */,
 				AB95CEAC2114A3A6009184BF /* MuseumCardCell.swift */,
+				AB3C7F3E211A92C000350DD4 /* PresentationCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -272,6 +292,7 @@
 				AB95CE9F2112474E009184BF /* Extensions.swift in Sources */,
 				AB95CEA721129317009184BF /* Firebase URLGetter.swift in Sources */,
 				AB95CEA321125B8B009184BF /* Card.swift in Sources */,
+				AB3C7F44211CCD8D00350DD4 /* EventDetailView.swift in Sources */,
 				AB95CEA92113C264009184BF /* EventsController.swift in Sources */,
 				AB9132182110AC1E005E8156 /* CategoryController.swift in Sources */,
 				AB95CEAF2114A438009184BF /* MuseumController.swift in Sources */,
@@ -280,6 +301,9 @@
 				AB9132282110BB99005E8156 /* CategoryCell.swift in Sources */,
 				AB9132302110F628005E8156 /* CardsController.swift in Sources */,
 				AB95CEA521128DDD009184BF /* Firebase Uploader.swift in Sources */,
+				AB3C7F3D211A89E300350DD4 /* PresentationController.swift in Sources */,
+				AB3C7F3F211A92C000350DD4 /* PresentationCell.swift in Sources */,
+				AB3C7F41211C90DC00350DD4 /* PresentationConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

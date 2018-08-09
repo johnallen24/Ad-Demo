@@ -51,7 +51,7 @@ class CategoryCell: UICollectionViewCell {
             nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             nameLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             nameLabel.heightAnchor.constraint(equalToConstant: 50),
-            nameLabel.widthAnchor.constraint(equalToConstant: 120)
+            nameLabel.widthAnchor.constraint(equalToConstant: 140)
             ])
     }
     

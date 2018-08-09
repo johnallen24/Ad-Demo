@@ -10,13 +10,14 @@ import UIKit
 import Firebase
 import CoreLocation
 
-@UIApplicationMain
+@UIApplicationMain 
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
     let locationManager = CLLocationManager()
     var cardsController: CardsController?
+    var presentationController: PresentationController?
     var region1: CLBeaconRegion!
     var region2: CLBeaconRegion!
     var region3: CLBeaconRegion!
@@ -56,16 +57,19 @@ extension AppDelegate: CLLocationManagerDelegate {
             let userDefault = UserDefaults.standard
             var curLocations = userDefault.value(forKey: "currentLocations2") as! [String]
             if !curLocations.contains(location) {
-            curLocations.append(location)
-            userDefault.set(curLocations, forKey: "currentLocations2")
+                curLocations.append(location)
+                userDefault.set(curLocations, forKey: "currentLocations2")
                 if let controller = cardsController {
                     print("reload")
                     controller.reloadData()
                 }
-
+                
             }
-            print(curLocations)
             
+            print(curLocations)
+            if let controller = presentationController {
+                controller.reloadData()
+            }
         }
     }
     

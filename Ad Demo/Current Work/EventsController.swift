@@ -17,6 +17,11 @@ class EventsController: UIViewController, UICollectionViewDelegate, UICollection
         return cv
     }()
     
+    let detailPopUpView: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +75,50 @@ class EventsController: UIViewController, UICollectionViewDelegate, UICollection
         return 2.0
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("123")
+        
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        let blurEffectView = UIVisualEffectView(frame: view.frame)
+       
+       
+        let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
+        let vibrancyEffectView = UIVisualEffectView(frame: blurEffectView.frame)
+       
+        view.addSubview(blurEffectView)
+         blurEffectView.translatesAutoresizingMaskIntoConstraints = false
+        view.addConstraints([
+            blurEffectView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            blurEffectView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            blurEffectView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            blurEffectView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
+        
+        blurEffectView.contentView.addSubview(vibrancyEffectView)
+        blurEffectView.effect = nil
+        vibrancyEffectView.effect = nil
+        
+        
+        DispatchQueue.main.async {
+        
+        let eventDetailView = EventDetailView()
+           
+            eventDetailView.locationLabel.layer.zPosition = 1
+        vibrancyEffectView.contentView.addSubview(eventDetailView)
+        eventDetailView.frame = vibrancyEffectView.contentView.frame
+        eventDetailView.alpha = 0
+       
+            UIView.animate(withDuration: 0.3, animations: {
+                vibrancyEffectView.effect = vibrancyEffect
+                blurEffectView.effect = blurEffect
+                eventDetailView.alpha = 1
+            }) { (bool) in
+               
+            }
+        }
+     
+       
+    }
     
-    
+
 }
