@@ -10,7 +10,7 @@ import UIKit
 
 class EventsController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-
+    
     let eventsCollectionView: UICollectionView = {
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
         cv.backgroundColor = UIColor.black
@@ -28,8 +28,8 @@ class EventsController: UIViewController, UICollectionViewDelegate, UICollection
         eventsCollectionView.delegate = self
         eventsCollectionView.dataSource = self
         eventsCollectionView.register(EventCell.self, forCellWithReuseIdentifier: "cellID")
-        
         setupViews()
+        extendedLayoutIncludesOpaqueBars = true
     
     }
     
@@ -75,45 +75,122 @@ class EventsController: UIViewController, UICollectionViewDelegate, UICollection
         return 2.0
     }
     
+    let refreshControl: UIRefreshControl = {
+       let rc = UIRefreshControl()
+        rc.addTarget(self, action: #selector(exitDescriptionView), for: .valueChanged)
+        rc.tintColor = UIColor.clear
+        return rc
+    }()
+    
+    let blurEffectView: UIVisualEffectView = {
+         let bev = UIVisualEffectView(effect: nil)
+        bev.translatesAutoresizingMaskIntoConstraints = false
+        return bev
+    }()
+    
+    let vibrancyEffectView: UIVisualEffectView = {
+        let vev = UIVisualEffectView(effect: nil)
+        vev.translatesAutoresizingMaskIntoConstraints = false
+        return vev
+    }()
+    
+    
+    let scrollView: UIScrollView = {
+        let sv = UIScrollView()
+        sv.contentSize.height = 1000
+        return sv
+    }()
+    
+    let eventDetailView: EventDetailView = {
+        let edv = EventDetailView()
+        return edv
+    }()
+    
+    let coverView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.clear
+        return view
+    }()
+    
+    
+    
+    @objc func exitDescriptionView() {
+        
+         DispatchQueue.main.async {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.vibrancyEffectView.effect = nil
+            self.blurEffectView.effect = nil
+            //self.descriptionContainerView.alpha = 0
+            self.scrollView.alpha = 0
+        }) { (bool) in
+            self.refreshControl.endRefreshing()
+            self.scrollView.refreshControl = nil
+            self.refreshControl.removeFromSuperview()
+            print(self.refreshControl.isRefreshing)
+            self.blurEffectView.removeFromSuperview()
+            self.eventDetailView.removeFromSuperview()
+            self.scrollView.removeFromSuperview()
+            
+        }
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("123")
         
+        
+        
+       // let cell = collectionView.cellForItem(at: indexPath) as! EventCell
+        
+        
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
-        let blurEffectView = UIVisualEffectView(frame: view.frame)
-       
-       
         let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
-        let vibrancyEffectView = UIVisualEffectView(frame: blurEffectView.frame)
-       
-        view.addSubview(blurEffectView)
-         blurEffectView.translatesAutoresizingMaskIntoConstraints = false
-        view.addConstraints([
-            blurEffectView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            blurEffectView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            blurEffectView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            blurEffectView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        
+       DispatchQueue.main.async {
+        self.view.addSubview(self.blurEffectView)
+        self.view.addConstraints([
+            self.blurEffectView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            self.blurEffectView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.blurEffectView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.blurEffectView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
             ])
         
-        blurEffectView.contentView.addSubview(vibrancyEffectView)
-        blurEffectView.effect = nil
-        vibrancyEffectView.effect = nil
+        self.blurEffectView.contentView.addSubview(self.vibrancyEffectView)
+        self.view.addConstraintsWithFormat(format: "H:|[v0]|", views: self.vibrancyEffectView)
+        self.view.addConstraintsWithFormat(format: "V:|[v0]|", views: self.vibrancyEffectView)
+
+        self.view.addSubview(self.scrollView)
+        self.scrollView.frame = self.view.frame
+        self.scrollView.addSubview(self.refreshControl)
+
+        let i = indexPath.row
+        self.eventDetailView.locationLabel.text = EventsConstants.locations[i]
+        self.eventDetailView.nameLabel.text = EventsConstants.names[i]
+        self.eventDetailView.descriptionLabel.text = EventsConstants.briefDescriptions[i]
+        self.eventDetailView.imageView.image = UIImage(named: EventsConstants.images[i])
+        self.eventDetailView.timeLabel.text = EventsConstants.times[i]
+        self.eventDetailView.addressLabel.text = EventsConstants.addresses[i]
+        self.eventDetailView.webAddressLabel.text = EventsConstants.webAdresses[i]
+        self.eventDetailView.synopsisLabel.text = EventsConstants.synopsises[i]
         
-        
-        DispatchQueue.main.async {
-        
-        let eventDetailView = EventDetailView()
-           
-            eventDetailView.locationLabel.layer.zPosition = 1
-        vibrancyEffectView.contentView.addSubview(eventDetailView)
-        eventDetailView.frame = vibrancyEffectView.contentView.frame
-        eventDetailView.alpha = 0
-       
+        self.scrollView.addSubview(self.eventDetailView)
+        self.eventDetailView.frame = self.scrollView.frame
+//        self.scrollView.addSubview(self.coverView)
+//        self.coverView.frame = self.scrollView.contentSize
+//        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.exitDescriptionView))
+        swipeRight.direction = UISwipeGestureRecognizerDirection.right
+        self.scrollView.addGestureRecognizer(swipeRight)
+
+        self.scrollView.alpha = 0
+        }
+       DispatchQueue.main.async {
             UIView.animate(withDuration: 0.3, animations: {
-                vibrancyEffectView.effect = vibrancyEffect
-                blurEffectView.effect = blurEffect
-                eventDetailView.alpha = 1
+                self.vibrancyEffectView.effect = vibrancyEffect
+                self.blurEffectView.effect = blurEffect
+                self.scrollView.alpha = 1
             }) { (bool) in
-               
+
             }
         }
      

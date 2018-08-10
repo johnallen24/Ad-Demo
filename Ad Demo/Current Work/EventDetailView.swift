@@ -10,11 +10,11 @@ import UIKit
 
 class EventDetailView: UIView {
     
-    let scrollView: UIScrollView = {
-        let sv = UIScrollView()
-        sv.contentSize.height = 2000
-        return sv
-    }()
+//    let scrollView: UIScrollView = {
+//        let sv = UIScrollView()
+//        //sv.contentSize.height = 2000
+//        return sv
+//    }()
     
     let locationLabel: UILabel = {
         let lb = UILabel()
@@ -106,11 +106,41 @@ class EventDetailView: UIView {
     let webAddressLabel: UILabel = {
         let lb = UILabel()
         lb.text = "www.comic-con.org"
+        lb.textColor = UIColor.colorWithHexString("ffde1c")
+        lb.textAlignment = .center
+        lb.font = UIFont(name: "AmericanTypewriter-Bold", size: 16)
+        return lb
+    }()
+    
+    let someLabel: UILabel = {
+        let lb = UILabel()
+        lb.text = "hello!!!"
         lb.textColor = UIColor.white
         lb.textAlignment = .center
         lb.font = UIFont(name: "AmericanTypewriter-Bold", size: 16)
         return lb
     }()
+    
+    let synposisTitleLabel: UILabel = {
+        let lb = UILabel()
+        lb.text = "Synopsis"
+        lb.textColor = UIColor.white
+        lb.textAlignment = .center
+        lb.font = UIFont(name: "AmericanTypewriter-Bold", size: 20)
+        return lb
+    }()
+    
+    let synopsisLabel: UILabel = {
+        let lb = UILabel()
+        lb.text = "hey"
+        lb.textColor = UIColor.white
+        lb.textAlignment = .center
+        lb.numberOfLines = 0
+        lb.font = UIFont(name: "AmericanTypewriter-Bold", size: 16)
+        return lb
+    }()
+    
+    
 
 
     override init(frame: CGRect) {
@@ -125,34 +155,22 @@ class EventDetailView: UIView {
     
     func setupViews() {
         
-        //topContainer.backgroundColor = UIColor.orange
-        scrollView.backgroundColor = UIColor.blue
-        
-//        addSubview(scrollView)
-//        addConstraintsWithFormat(format: "H:|[v0]|", views: scrollView)
-//        addConstraintsWithFormat(format: "V:|[v0]|", views: scrollView)
-        
-        
         
         addSubview(topContainer)
         addSubview(imageView)
         addSubview(bottomContainer)
-        addConstraintsWithFormat(format: "V:|[v0(185)]-32-[v1(185)]-32-[v2(185)]", views: topContainer, imageView, bottomContainer)
+        addSubview(synposisTitleLabel)
+        addSubview(synopsisLabel)
+        addConstraintsWithFormat(format: "V:|[v0(185)]-32-[v1(185)]-32-[v2(185)]-32-[v3(20)]-16-[v4(200)]", views: topContainer, imageView, bottomContainer, synposisTitleLabel, synopsisLabel)
         addConstraintsWithFormat(format: "H:|[v0]|", views: topContainer)
         addConstraintsWithFormat(format: "H:|-16-[v0]-16-|", views: imageView)
         addConstraintsWithFormat(format: "H:|[v0]|", views: bottomContainer)
+         addConstraintsWithFormat(format: "H:|[v0]|", views: synposisTitleLabel)
+        addConstraintsWithFormat(format: "H:|-32-[v0]-32-|", views: synopsisLabel)
         imageView.image = UIImage(named: "comiccon")
         
         setupTopContainer()
         setupBottomContainer()
-        
-        
-        
-        
-        
-        
-        
-        
         
     }
     

@@ -12,6 +12,7 @@
 		AB3C7F3F211A92C000350DD4 /* PresentationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3C7F3E211A92C000350DD4 /* PresentationCell.swift */; };
 		AB3C7F41211C90DC00350DD4 /* PresentationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3C7F40211C90DC00350DD4 /* PresentationConstants.swift */; };
 		AB3C7F44211CCD8D00350DD4 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3C7F43211CCD8D00350DD4 /* EventDetailView.swift */; };
+		AB3C7F46211DEA4300350DD4 /* EventsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3C7F45211DEA4300350DD4 /* EventsConstants.swift */; };
 		AB9132162110AC1E005E8156 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9132152110AC1E005E8156 /* AppDelegate.swift */; };
 		AB9132182110AC1E005E8156 /* CategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9132172110AC1E005E8156 /* CategoryController.swift */; };
 		AB91321B2110AC1E005E8156 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB9132192110AC1E005E8156 /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 		AB3C7F3E211A92C000350DD4 /* PresentationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationCell.swift; sourceTree = "<group>"; };
 		AB3C7F40211C90DC00350DD4 /* PresentationConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PresentationConstants.swift; path = "/Users/johnallen/Desktop/Beacon Projects/Ad Demo/Ad Demo/PresentationConstants.swift"; sourceTree = "<absolute>"; };
 		AB3C7F43211CCD8D00350DD4 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
+		AB3C7F45211DEA4300350DD4 /* EventsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsConstants.swift; sourceTree = "<group>"; };
 		AB9132122110AC1E005E8156 /* Ad Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ad Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB9132152110AC1E005E8156 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB9132172110AC1E005E8156 /* CategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryController.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				AB3C7F43211CCD8D00350DD4 /* EventDetailView.swift */,
 				AB95CEAA2113C603009184BF /* EventCell.swift */,
 				AB95CEA82113C264009184BF /* EventsController.swift */,
+				AB3C7F45211DEA4300350DD4 /* EventsConstants.swift */,
 			);
 			path = "Current Work";
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				AB95CEA721129317009184BF /* Firebase URLGetter.swift in Sources */,
 				AB95CEA321125B8B009184BF /* Card.swift in Sources */,
 				AB3C7F44211CCD8D00350DD4 /* EventDetailView.swift in Sources */,
+				AB3C7F46211DEA4300350DD4 /* EventsConstants.swift in Sources */,
 				AB95CEA92113C264009184BF /* EventsController.swift in Sources */,
 				AB9132182110AC1E005E8156 /* CategoryController.swift in Sources */,
 				AB95CEAF2114A438009184BF /* MuseumController.swift in Sources */,
